@@ -1,5 +1,16 @@
+POST http://localhost:5000/api/users/register
+Content-Type: application/json
+
+{
+    "email": "toesle@gmail.com",
+    "password": "14344508"
+}
+
+###
+
 POST http://localhost:5000/api/email/send-email
 Content-Type: application/json
+
 {
     "to": "martorressearle@gmail.com",
     "subject": "Test Email",
