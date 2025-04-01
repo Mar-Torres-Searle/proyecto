@@ -38,9 +38,6 @@ const userValidate = async (req, res) => {
     return res.send({message: "El email es valido"})
 }
 
-
-
-
 const loginUser = async (req, res) => {
     //comprobamos que el usuario exista y que este validado, status 1
     const {email, password} = req.body
@@ -59,4 +56,23 @@ const loginUser = async (req, res) => {
     
 }
 
-module.exports = {registerUser, loginUser, userValidate}
+
+const getUserData = async (req, res) => {
+    const user = await UserModel.findById(req.user._id).select("-createdAt -updatedAt -code")
+    return res.send({user})
+}
+const deleteUser = async (req, res) => {
+    const {soft} = req.query;
+    const user = req.user;
+
+    if (soft === "false") {
+        await UserModel.deleteOne({_id: user._id})
+    }else{
+        user.status = -1
+        await user.save()
+        return res.send({message: "El usuario ha sido eliminado"})
+    }
+    return res.send({message: "El usuario ha sido eliminado"})
+}
+
+module.exports = {registerUser, loginUser, userValidate, getUserData, deleteUser}

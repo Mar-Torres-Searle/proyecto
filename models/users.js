@@ -15,12 +15,31 @@ const UserScheme = new mongoose.Schema(
             unique: true
         },
         password:{
-            type: String // TODO Guardaremos el hash
+            type: String 
+        },
+        address:{
+            street: String,
+            number: String,
+            city: String,
+            province: String,
+            postalCode: String,
+            country: String,
+        },
+        company:{
+            name: String,
+            cif: String,
+            street: String,
+            number: String,
+            city: String,
+            province: String,
+            postalCode: String,
+            country: String,
+            
         },
         status:{
             type: Number,
             default: 0,
-            enum: [0, 1]  // Solo permite valores 0 o 1
+            enum: [0, 1, -1]  // Solo permite valores 0 o 1
         },
         role:{
             type: ["user", "admin"], // es el enum de SQL

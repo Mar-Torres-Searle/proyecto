@@ -19,4 +19,6 @@ const validatorCode = [
     }
 ]
 
-module.exports = { validatorRegister,  validatorCode }
+
+
+module.exports = { validatorRegister,  validatorCode}
