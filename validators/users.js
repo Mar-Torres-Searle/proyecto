@@ -35,4 +35,11 @@ const userDataValidator = [
     }
 ]
 
-module.exports = { validatorRegister,  validatorCode, userDataValidator, addressValidator}
+const companyValidator = [
+    check("company").exists().notEmpty(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
+
+module.exports = { validatorRegister,  validatorCode, userDataValidator, addressValidator, companyValidator}

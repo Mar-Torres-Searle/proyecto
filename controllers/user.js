@@ -80,6 +80,14 @@ const addUserAddress = async (req, res) => {
     return res.send({message: "La dirección ha sido añadida"})
 }
 
+const addCompany = async (req, res) => {
+    const {company} = req.body
+    const user = req.user
+    user.company = company
+    user.autonomo = false
+    await user.save()
+    return res.send({message: "La empresa ha sido añadida"})
+}   
 
 const getUserData = async (req, res) => {
     const user = await UserModel.findById(req.user._id).select("-createdAt -updatedAt -code -password")
@@ -99,4 +107,4 @@ const deleteUser = async (req, res) => {
     return res.send({message: "El usuario ha sido eliminado"})
 }
 
-module.exports = {registerUser, loginUser, userValidate, getUserData, deleteUser, completeRegistration, addUserAddress}
+module.exports = {registerUser, loginUser, userValidate, getUserData, deleteUser, completeRegistration, addUserAddress, addCompany}

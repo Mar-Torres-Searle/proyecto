@@ -45,7 +45,23 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjMWNjN
 }
 
 ###
+PATCH http://localhost:5000/api/users/company
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjMWNjNThkZjU1ZDdmOTI2MTA0MTYiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtc0BnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzUyNzEwOSwiZXhwIjoxNzQzNTM0MzA5fQ.LWyiWX9F-fLIWmHzn4SU-WdiHB70s4sy8GAMSf5VaxE
 
+{
+    "company": {
+        "name": "Empresa de prueba",
+        "address": "Calle San Vicente",
+        "number": "5",
+        "city": "Las Rozas",
+        "province": "Madrid",
+        "postalCode": "28001",
+        "country": "Spain"
+    }
+}
+
+###
 GET http://localhost:5000/api/users/
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjMWNjNThkZjU1ZDdmOTI2MTA0MTYiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtc0BnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzUyNzEwOSwiZXhwIjoxNzQzNTM0MzA5fQ.LWyiWX9F-fLIWmHzn4SU-WdiHB70s4sy8GAMSf5VaxE

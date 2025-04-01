@@ -1,7 +1,7 @@
 const express = require('express');
 const routerUsers = express.Router();
-const {registerUser, loginUser, userValidate, getUserData, deleteUser, addUserAddress, completeRegistration} = require("../controllers/user")
-const {validatorRegister, validatorCode, userDataValidator, addressValidator} = require("../validators/users")
+const {registerUser, loginUser, userValidate, getUserData, deleteUser, addUserAddress, completeRegistration, addCompany} = require("../controllers/user")
+const {validatorRegister, validatorCode, userDataValidator, addressValidator, companyValidator} = require("../validators/users")
 const {attemptsMiddleware} = require("../middleware/users")
 const {authMiddleware} = require("../middleware/session")
  
@@ -14,6 +14,7 @@ routerUsers.get("/", authMiddleware, getUserData)
 routerUsers.delete("/", authMiddleware, deleteUser)
 routerUsers.put("/register", userDataValidator, authMiddleware, completeRegistration)
 routerUsers.patch("/address", addressValidator, authMiddleware, addUserAddress)
+routerUsers.patch("/company", companyValidator, authMiddleware, addCompany)
 
 
 module.exports = {routerUsers}
