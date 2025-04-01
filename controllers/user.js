@@ -152,9 +152,6 @@ const recoveyCodeRequest = async (req, res) => {
     if (!user) {
         return res.status(404).send({message: "El email no está registrado"})
     }
-    if (user.status !== 1) {
-        return res.status(404).send({message: "El email no está validado"})
-    }
     user.recoveryCode = generateCode()
     await user.save()
     return res.send({message: "El codigo de recuperación ha sido enviado", recoveryCode: user.recoveryCode})
@@ -166,9 +163,6 @@ const revoverPassword = async (req, res) => {
     if (!user) {
         return res.status(404).send({message: "El email no está registrado"})
     }
-    if (user.status !== 1) {
-        return res.status(404).send({message: "El email no está validado"})
-    }
     if (user.recoveryCode !== recoveryCode) {
         return res.status(404).send({message: "El codigo de recuperación es incorrecto"})
     }
@@ -179,4 +173,23 @@ const revoverPassword = async (req, res) => {
     
 }
 
-module.exports = {registerUser, loginUser, userValidate, getUserData, deleteUser, completeRegistration, addUserAddress, addCompany, uploadLogo, recoveyCodeRequest, revoverPassword}
+const addGuest = async (req, res) => {
+    const {email} = req.body
+    const user = req.user
+    if (user.guests.includes(email)) {
+        return res.status(404).send({ message: "El guest ya existe en la lista de invitados" });
+    } 
+    const newGuest = new UserModel({
+        email,
+        role: 'guest',
+        autonomo: false,
+        company: user.company // Asignar la misma compañía que el usuario
+    });
+
+    await newGuest.save(); // Guardar el nuevo guest
+    user.guests.push(newGuest._id); // Agregar el ID del nuevo guest a la lista de guests del usuario
+    await user.save();
+    return res.send({message: "El guest ha sido invitado y añadido a la lista",guest:newGuest, guests: user.guests})
+}
+
+module.exports = {registerUser, loginUser, userValidate, getUserData, deleteUser, completeRegistration, addUserAddress, addCompany, uploadLogo, recoveyCodeRequest, revoverPassword, addGuest}

@@ -46,7 +46,7 @@ const UserScheme = new mongoose.Schema(
             enum: [0, 1, -1]  
         },
         role:{
-            type: ["user", "admin"], 
+            type: ["user", "guest"], 
             default: "user"
         },
         emailCode: {
@@ -62,7 +62,13 @@ const UserScheme = new mongoose.Schema(
         logo: {
             url: String,
             filename: String
-        }
+        },
+        guests:[
+            {
+                ref: "users",
+                type: mongoose.Schema.Types.ObjectId
+            }
+        ]
     },
     {
         timestamps: true, 
