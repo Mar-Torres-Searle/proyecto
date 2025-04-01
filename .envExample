@@ -1,0 +1,14 @@
+PORT=<Puerto de la aplicación>
+DB_URI=<URI base de datos>
+
+EMAIL=<Email app>
+REFRESH_TOKEN= <Token de refresh>
+CLIENT_SECRET= <Secret cliente>
+CLIENT_ID= <ID cliente>
+REDIRECT_URI= <URI de redireccionamiento>
+
+PINATA_GATEWAY_URL= <URL gateway pinata>
+PINATA_KEY= <Key pinata>
+PINATA_SECRET= <Secret pinata>
+
+JWT_SECRET=<MasterKey>
