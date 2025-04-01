@@ -43,23 +43,27 @@ const UserScheme = new mongoose.Schema(
         status:{
             type: Number,
             default: 0,
-            enum: [0, 1, -1]  // Solo permite valores 0 o 1
+            enum: [0, 1, -1]  
         },
         role:{
-            type: ["user", "admin"], // es el enum de SQL
+            type: ["user", "admin"], 
             default: "user"
         },
-        code: {
+        emailCode: {
             type: String
         },
         attempts: {
             type: Number,
             default: 3
+        },
+        logo: {
+            url: String,
+            filename: String
         }
     },
     {
-        timestamps: true, // TODO createdAt, updatedAt
+        timestamps: true, 
         versionKey: false
     }
 )
-module.exports = mongoose.model("users", UserScheme) // "users" es el nombre de la colección en mongoDB (o de la tabla en SQL)
+module.exports = mongoose.model("users", UserScheme) 

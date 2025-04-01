@@ -1,25 +1,29 @@
+
+//registrar usuario
 POST http://localhost:5000/api/users/register
 Content-Type: application/json
 
 {
     "name": "Mar",
-    "email": "ms@gmail.com",  
+    "email": "mtss@gmail.com",  
     "password": "14555508"
 }
 
+//validar usuario
 ###
 PUT http://localhost:5000/api/users/validate            
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjMWNjNThkZjU1ZDdmOTI2MTA0MTYiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtc0BnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzUyNzEwOSwiZXhwIjoxNzQzNTM0MzA5fQ.LWyiWX9F-fLIWmHzn4SU-WdiHB70s4sy8GAMSf5VaxE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjNDNhZjc3NGU4MjQ3NTdhMGFjMGMiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtdHNzQGdtYWlsLmNvbSIsInN0YXR1cyI6MCwiaWF0IjoxNzQzNTM3MDcyLCJleHAiOjE3NDM1NDQyNzJ9.fYF7uPmy2wzA8jK9xDIrkUZYLAk-JuEHXrtcanppDzU
 
 {
-    "code": "593104"
+    "emailCode": "324399"
 }
 
+//completar registro
 ###
 PUT http://localhost:5000/api/users/register
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjMWNjNThkZjU1ZDdmOTI2MTA0MTYiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtc0BnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzUyNzEwOSwiZXhwIjoxNzQzNTM0MzA5fQ.LWyiWX9F-fLIWmHzn4SU-WdiHB70s4sy8GAMSf5VaxE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjNDNhZjc3NGU4MjQ3NTdhMGFjMGMiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtdHNzQGdtYWlsLmNvbSIsInN0YXR1cyI6MCwiaWF0IjoxNzQzNTM3MDcyLCJleHAiOjE3NDM1NDQyNzJ9.fYF7uPmy2wzA8jK9xDIrkUZYLAk-JuEHXrtcanppDzU
 
 {
     "name": "Mar",
@@ -27,10 +31,20 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjMWNjN
     "nif": "837004"
 }
 
+//login
+###
+POST http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+    "email": "mtss@gmail.com",
+    "password": "14555508"
+}
+
 ###
 PATCH http://localhost:5000/api/users/address
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjMWNjNThkZjU1ZDdmOTI2MTA0MTYiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtc0BnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzUyNzEwOSwiZXhwIjoxNzQzNTM0MzA5fQ.LWyiWX9F-fLIWmHzn4SU-WdiHB70s4sy8GAMSf5VaxE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjNDNhZjc3NGU4MjQ3NTdhMGFjMGMiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtdHNzQGdtYWlsLmNvbSIsInN0YXR1cyI6MCwiaWF0IjoxNzQzNTM3MDcyLCJleHAiOjE3NDM1NDQyNzJ9.fYF7uPmy2wzA8jK9xDIrkUZYLAk-JuEHXrtcanppDzU
 
 {
     "address": {
@@ -47,7 +61,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjMWNjN
 ###
 PATCH http://localhost:5000/api/users/company
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjMWNjNThkZjU1ZDdmOTI2MTA0MTYiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtc0BnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzUyNzEwOSwiZXhwIjoxNzQzNTM0MzA5fQ.LWyiWX9F-fLIWmHzn4SU-WdiHB70s4sy8GAMSf5VaxE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjNDNhZjc3NGU4MjQ3NTdhMGFjMGMiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtdHNzQGdtYWlsLmNvbSIsInN0YXR1cyI6MCwiaWF0IjoxNzQzNTM3MDcyLCJleHAiOjE3NDM1NDQyNzJ9.fYF7uPmy2wzA8jK9xDIrkUZYLAk-JuEHXrtcanppDzU
 
 {
     "company": {
@@ -61,10 +75,23 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjMWNjN
     }
 }
 
+
+###
+PATCH http://localhost:5000/api/users/logo
+Content-Type: multipart/form-data; boundary=boundary123
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjNDNhZjc3NGU4MjQ3NTdhMGFjMGMiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtdHNzQGdtYWlsLmNvbSIsInN0YXR1cyI6MCwiaWF0IjoxNzQzNTM3MDcyLCJleHAiOjE3NDM1NDQyNzJ9.fYF7uPmy2wzA8jK9xDIrkUZYLAk-JuEHXrtcanppDzU
+
+--boundary123
+Content-Disposition: form-data; name="image"; filename="logoUser.jpeg"
+Content-Type: image/jpeg
+
+< ./logoUser.jpeg
+--boundary123--
+
 ###
 GET http://localhost:5000/api/users/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjMWNjNThkZjU1ZDdmOTI2MTA0MTYiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtc0BnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzUyNzEwOSwiZXhwIjoxNzQzNTM0MzA5fQ.LWyiWX9F-fLIWmHzn4SU-WdiHB70s4sy8GAMSf5VaxE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjNDNhZjc3NGU4MjQ3NTdhMGFjMGMiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtdHNzQGdtYWlsLmNvbSIsInN0YXR1cyI6MCwiaWF0IjoxNzQzNTM3MDcyLCJleHAiOjE3NDM1NDQyNzJ9.fYF7uPmy2wzA8jK9xDIrkUZYLAk-JuEHXrtcanppDzU
 ###
 
 DELETE http://localhost:5000/api/users?soft=false
@@ -72,14 +99,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2ViZWM2NDkyY2RiZmNmYTYzMDY2MDciLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtYXJ0b3JyZUBnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzUxNDcyNCwiZXhwIjoxNzQzNTIxOTI0fQ.LdBrz8idZxVJO74QSZTo9C10wbbqy3M8-hAyv7zS_24
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2ViZWM2NDkyY2RiZmNmYTYzMDY2MDciLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtYXJ0b3JyZUBnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzUxNDcyNCwiZXhwIjoxNzQzNTIxOTI0fQ.LdBrz8idZxVJO74QSZTo9C10wbbqy3M8-hAyv7zS_24
 
-###
-POST http://localhost:5000/api/users/login
-Content-Type: application/json
 
-{
-    "email": "gsp@gmail.com",
-    "password": "14344508"
-}
 
 ###
 POST http://localhost:5000/api/email/send-email

@@ -3,6 +3,8 @@ const {encrypt, compare} = require("../utils/handlePassword")
 const {tokenSign} = require("../utils/handleJwt")
 const { matchedData } = require("express-validator");
 const {generateCode} = require("../utils/handleRegister")
+const {uploadToPinata} = require("../utils/handleUploadPFS")
+
 const registerUser = async (req, res) => {
     const {email, password} = req.body
     const checkIs = await UserModel.findOne({email}).select("-pas-createdAt -updatedAt")
@@ -11,7 +13,7 @@ const registerUser = async (req, res) => {
     }
 
     const passwordHash = await encrypt(password)
-    const body = {...req.body, password: passwordHash, code: generateCode()}
+    const body = {...req.body, password: passwordHash, emailCode: generateCode()}
     const dataUser = await UserModel.create(body)
     dataUser.set('password', undefined, {strict: false})
     dataUser.set('createdAt', undefined, {strict: false})
@@ -27,8 +29,8 @@ const registerUser = async (req, res) => {
 
 const userValidate = async (req, res) => {
     const user = req.user
-    const {code} = req.body
-    if (user.code !== code) {
+    const {emailCode} = req.body
+    if (user.emailCode !== emailCode) {
         user.attempts = user.attempts - 1
         await user.save()
         res.status(409).json({message: "El codigo es incorrecto"})
@@ -41,7 +43,7 @@ const userValidate = async (req, res) => {
 const loginUser = async (req, res) => {
     //comprobamos que el usuario exista y que este validado, status 1
     const {email, password} = req.body
-    const user = await UserModel.findOne({email, status: 1}).select("-createdAt -updatedAt")
+    const user = await UserModel.findOne({email, status: 1})
     if (!user) {
         res.status(409).json({message: "El email no está registrado"})
     }
@@ -52,7 +54,15 @@ const loginUser = async (req, res) => {
     }
     
     user.set('password', undefined, {strict: false})
-    res.send({token: await tokenSign(user), user})
+    const response = {
+        token: await tokenSign(user),
+        email: user.email,
+        role: user.role,
+        _id: user._id,
+        name: user.name
+    };
+
+    res.send(response);
     
 }
 
@@ -64,7 +74,9 @@ const completeRegistration = async (req, res) => {
     user.nif = nif
     user.address = address  
     await user.save()
-    return res.send({message: "El usuario ha sido completado"})
+    const { _id, email, emailCode, status, role, createdAt, updatedAt } = user.toObject();
+    return res.send({ _id, email, emailCode, status, role, createdAt, updatedAt, name, nif, lastname });
+
 }
 
 const addUserAddress = async (req, res) => {
@@ -77,7 +89,7 @@ const addUserAddress = async (req, res) => {
         user.company = address
         await user.save()
     }
-    return res.send({message: "La dirección ha sido añadida"})
+    return res.send({message: "La dirección ha sido añadida", address: user.address})
 }
 
 const addCompany = async (req, res) => {
@@ -86,8 +98,32 @@ const addCompany = async (req, res) => {
     user.company = company
     user.autonomo = false
     await user.save()
-    return res.send({message: "La empresa ha sido añadida"})
+    return res.send({message: "La empresa ha sido añadida", company: user.company, autonomo: user.autonomo})
 }   
+
+
+const uploadLogo = async (req, res, next) => {
+
+    try{
+
+        const user = req.user
+        const fileBuffer = req.file.buffer  
+        const fileName = req.file.originalname
+        //guardar la imagen en la carpeta storage
+        
+        const pinataResponse = await uploadToPinata(fileBuffer, fileName)
+        const ipfsFile = pinataResponse.IpfsHash
+        const ipfs = `https://${process.env.PINATA_GATEWAY_URL}/ipfs/${ipfsFile}`
+        user.logo = {url: ipfs, filename: fileName}
+        await user.save()
+        res.send({message: "La imagen ha sido subida", logo: user.logo})
+
+    }catch(err){
+
+        console.log(err)
+        next(err)
+    }
+}
 
 const getUserData = async (req, res) => {
     const user = await UserModel.findById(req.user._id).select("-createdAt -updatedAt -code -password")
@@ -107,4 +143,4 @@ const deleteUser = async (req, res) => {
     return res.send({message: "El usuario ha sido eliminado"})
 }
 
-module.exports = {registerUser, loginUser, userValidate, getUserData, deleteUser, completeRegistration, addUserAddress, addCompany}
+module.exports = {registerUser, loginUser, userValidate, getUserData, deleteUser, completeRegistration, addUserAddress, addCompany, uploadLogo}
