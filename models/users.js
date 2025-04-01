@@ -19,12 +19,19 @@ const UserScheme = new mongoose.Schema(
         },
         status:{
             type: Number,
-            default: 1,
+            default: 0,
             enum: [0, 1]  // Solo permite valores 0 o 1
         },
         role:{
             type: ["user", "admin"], // es el enum de SQL
             default: "user"
+        },
+        code: {
+            type: String
+        },
+        attempts: {
+            type: Number,
+            default: 3
         }
     },
     {

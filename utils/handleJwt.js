@@ -5,7 +5,9 @@ const tokenSign = (user) => {
     const sign = jwt.sign(
         {
             _id: user._id,
-            role: user.role
+            role: user.role,
+            email: user.email,
+            status: user.status
         },
 
         JWT_SECRET,

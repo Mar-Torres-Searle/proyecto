@@ -12,30 +12,11 @@ const validatorRegister = [
 ]
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Definir validador para que el login sea un email valido y la password contenga al menos 8 caracteres
-const validatorLogin = [
-
-    check("email").exists().notEmpty().isEmail(),
-    check("password").exists().notEmpty().isLength( {min:8, max: 16} ),
-    
+const validatorCode = [
+    check("code").exists().notEmpty().isLength( {min:6, max: 6} ),
     (req, res, next) => {
         return validateResults(req, res, next)
     }
 ]
 
-module.exports = { validatorRegister, validatorLogin }
+module.exports = { validatorRegister,  validatorCode }

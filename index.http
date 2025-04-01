@@ -3,8 +3,17 @@ Content-Type: application/json
 
 {
     "name": "Mar",
-    "email": "gsp@gmail.com",
-    "password": "14344508"
+    "email": "martorre@gmail.com",
+    "password": "14555508"
+}
+
+###
+PUT http://localhost:5000/api/users/validate
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2ViZWM2NDkyY2RiZmNmYTYzMDY2MDciLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtYXJ0b3JyZUBnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzUxNDcyNCwiZXhwIjoxNzQzNTIxOTI0fQ.LdBrz8idZxVJO74QSZTo9C10wbbqy3M8-hAyv7zS_24
+
+{
+    "code": "347092"
 }
 
 ###
