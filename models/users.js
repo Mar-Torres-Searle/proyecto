@@ -19,7 +19,7 @@ const UserScheme = new mongoose.Schema(
         },
         status:{
             type: Number,
-            default: 0,
+            default: 1,
             enum: [0, 1]  // Solo permite valores 0 o 1
         },
         role:{

@@ -9,6 +9,7 @@ const registerUser = async (req, res) => {
     if (checkIs) {
         res.status(409).json({message: "El email ya está registrado"})
     }
+
     const passwordHash = await encrypt(password)
     const body = {...req.body, password: passwordHash}
     const dataUser = await UserModel.create(body)
@@ -23,9 +24,31 @@ const registerUser = async (req, res) => {
 
     const data = {
         token: await tokenSign(dataUser),
-        user: userData
+        user: body
     }
     res.send(data)
 }
 
-module.exports = {registerUser}
+//const emailValidator = async (req, res) => {
+    
+//}
+
+const loginUser = async (req, res) => {
+    //comprobamos que el usuario exista y que este validado, status 1
+    const {email, password} = req.body
+    const user = await UserModel.findOne({email, status: 1}).select("-createdAt -updatedAt")
+    if (!user) {
+        res.status(409).json({message: "El email no está registrado"})
+    }
+        //comprobamos que la contraseña sea correcta
+    const passwordHash = await compare(password, user.password)
+    if (!passwordHash) {
+        res.status(409).json({message: "La contraseña es incorrecta"})
+    }
+    
+    user.set('password', undefined, {strict: false})
+    res.send({token: await tokenSign(user), user})
+    
+}
+
+module.exports = {registerUser, loginUser}

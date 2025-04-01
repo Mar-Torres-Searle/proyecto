@@ -26,6 +26,7 @@ const validatorRegister = [
 
 
 
+
 //Definir validador para que el login sea un email valido y la password contenga al menos 8 caracteres
 const validatorLogin = [
 

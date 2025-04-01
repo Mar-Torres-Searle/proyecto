@@ -2,12 +2,21 @@ POST http://localhost:5000/api/users/register
 Content-Type: application/json
 
 {
-    "email": "toesle@gmail.com",
+    "name": "Mar",
+    "email": "gsp@gmail.com",
     "password": "14344508"
 }
 
 ###
+POST http://localhost:5000/api/users/login
+Content-Type: application/json
 
+{
+    "email": "gsp@gmail.com",
+    "password": "14344508"
+}
+
+###
 POST http://localhost:5000/api/email/send-email
 Content-Type: application/json
 
@@ -15,4 +24,12 @@ Content-Type: application/json
     "to": "martorressearle@gmail.com",
     "subject": "Test Email",
     "text": "This is a test email." 
+}
+
+POST http://localhost:3000/api/send-email
+Content-Type: application/json
+
+{
+    "email": "el@gmail.com",
+    "password": "14344508"
 }
