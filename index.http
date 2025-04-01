@@ -3,26 +3,54 @@ Content-Type: application/json
 
 {
     "name": "Mar",
-    "email": "martorre@gmail.com",
+    "email": "ms@gmail.com",  
     "password": "14555508"
 }
 
 ###
-PUT http://localhost:5000/api/users/validate
+PUT http://localhost:5000/api/users/validate            
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2ViZWM2NDkyY2RiZmNmYTYzMDY2MDciLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtYXJ0b3JyZUBnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzUxNDcyNCwiZXhwIjoxNzQzNTIxOTI0fQ.LdBrz8idZxVJO74QSZTo9C10wbbqy3M8-hAyv7zS_24
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjMWNjNThkZjU1ZDdmOTI2MTA0MTYiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtc0BnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzUyNzEwOSwiZXhwIjoxNzQzNTM0MzA5fQ.LWyiWX9F-fLIWmHzn4SU-WdiHB70s4sy8GAMSf5VaxE
 
 {
-    "code": "347092"
+    "code": "593104"
 }
 
+###
+PUT http://localhost:5000/api/users/register
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjMWNjNThkZjU1ZDdmOTI2MTA0MTYiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtc0BnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzUyNzEwOSwiZXhwIjoxNzQzNTM0MzA5fQ.LWyiWX9F-fLIWmHzn4SU-WdiHB70s4sy8GAMSf5VaxE
+
+{
+    "name": "Mar",
+    "lastname": "Torre",
+    "nif": "837004"
+}
 
 ###
+PATCH http://localhost:5000/api/users/address
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjMWNjNThkZjU1ZDdmOTI2MTA0MTYiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtc0BnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzUyNzEwOSwiZXhwIjoxNzQzNTM0MzA5fQ.LWyiWX9F-fLIWmHzn4SU-WdiHB70s4sy8GAMSf5VaxE
+
+{
+    "address": {
+        "street": "Calle de la Constitución",
+        "number": "1",
+        "city": "Madrid",
+        "province": "Madrid",
+        "postalCode": "28001",
+        "country": "Spain"
+    }
+
+}
+
+###
+
 GET http://localhost:5000/api/users/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2ViZWM2NDkyY2RiZmNmYTYzMDY2MDciLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtYXJ0b3JyZUBnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzUxNDcyNCwiZXhwIjoxNzQzNTIxOTI0fQ.LdBrz8idZxVJO74QSZTo9C10wbbqy3M8-hAyv7zS_24
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjMWNjNThkZjU1ZDdmOTI2MTA0MTYiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtc0BnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzUyNzEwOSwiZXhwIjoxNzQzNTM0MzA5fQ.LWyiWX9F-fLIWmHzn4SU-WdiHB70s4sy8GAMSf5VaxE
 ###
+
 DELETE http://localhost:5000/api/users?soft=false
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2ViZWM2NDkyY2RiZmNmYTYzMDY2MDciLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtYXJ0b3JyZUBnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzUxNDcyNCwiZXhwIjoxNzQzNTIxOTI0fQ.LdBrz8idZxVJO74QSZTo9C10wbbqy3M8-hAyv7zS_24

@@ -17,6 +17,10 @@ const UserScheme = new mongoose.Schema(
         password:{
             type: String 
         },
+        autonomo:{
+            type: Boolean,
+            default: true
+        },
         address:{
             street: String,
             number: String,

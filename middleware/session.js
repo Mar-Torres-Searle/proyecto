@@ -2,8 +2,6 @@ const { handleHttpError } = require("../utils/handleError")
 const { verifyToken } = require("../utils/handleJwt")
 const UserModel = require("../models/users")
 const authMiddleware = async (req, res, next) => {
-
-    console.log(req.headers.authorization)
     try{
         if (!req.headers.authorization) {
             handleHttpError(res, "NOT_TOKEN", 401)

@@ -19,6 +19,20 @@ const validatorCode = [
     }
 ]
 
+const addressValidator = [
+    check("address").exists().notEmpty(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
 
+const userDataValidator = [
+    check("name").exists().notEmpty(),
+    check("lastname").exists().notEmpty(),
+    check("nif").exists().notEmpty(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
 
-module.exports = { validatorRegister,  validatorCode}
+module.exports = { validatorRegister,  validatorCode, userDataValidator, addressValidator}

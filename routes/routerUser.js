@@ -9,9 +9,11 @@ routerUsers.use(express.json());
 
 routerUsers.post("/register", validatorRegister, registerUser)
 routerUsers.post("/login", loginUser)
-routerUsers.put("/validate", validatorCode, authMiddleware, attemptsMiddleware, userValidate)
+routerUsers.put("/validate", authMiddleware, validatorCode, attemptsMiddleware, userValidate)
 routerUsers.get("/", authMiddleware, getUserData)
 routerUsers.delete("/", authMiddleware, deleteUser)
+routerUsers.put("/register", userDataValidator, authMiddleware, completeRegistration)
+routerUsers.patch("/address", addressValidator, authMiddleware, addUserAddress)
 
 
 module.exports = {routerUsers}

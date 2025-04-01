@@ -56,9 +56,33 @@ const loginUser = async (req, res) => {
     
 }
 
+const completeRegistration = async (req, res) => {
+    const {name, lastname, nif, address} = req.body
+    const user = req.user
+    user.name = name
+    user.lastname = lastname
+    user.nif = nif
+    user.address = address  
+    await user.save()
+    return res.send({message: "El usuario ha sido completado"})
+}
+
+const addUserAddress = async (req, res) => {
+    const {address} = req.body
+    
+    const user = req.user
+    user.address = address
+    await user.save()
+    if (user.autonomo) {
+        user.company = address
+        await user.save()
+    }
+    return res.send({message: "La dirección ha sido añadida"})
+}
+
 
 const getUserData = async (req, res) => {
-    const user = await UserModel.findById(req.user._id).select("-createdAt -updatedAt -code")
+    const user = await UserModel.findById(req.user._id).select("-createdAt -updatedAt -code -password")
     return res.send({user})
 }
 const deleteUser = async (req, res) => {
@@ -75,4 +99,4 @@ const deleteUser = async (req, res) => {
     return res.send({message: "El usuario ha sido eliminado"})
 }
 
-module.exports = {registerUser, loginUser, userValidate, getUserData, deleteUser}
+module.exports = {registerUser, loginUser, userValidate, getUserData, deleteUser, completeRegistration, addUserAddress}
