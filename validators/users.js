@@ -12,8 +12,23 @@ const validatorRegister = [
 ]
 
 
+
+
 const validatorCode = [
     check("emailCode").exists().notEmpty().isLength( {min:6, max: 6} ),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
+
+const validatorRecoveryCode = [
+    check("email").exists().notEmpty().isEmail(),
+    check("recoveryCode").exists().notEmpty().isLength( {min:6, max: 6} ),
+    
+]
+
+const passwordValidator = [
+    check("password").exists().notEmpty().isLength( {min:8} ),
     (req, res, next) => {
         return validateResults(req, res, next)
     }
@@ -42,4 +57,4 @@ const companyValidator = [
     }
 ]
 
-module.exports = { validatorRegister,  validatorCode, userDataValidator, addressValidator, companyValidator}
+module.exports = { validatorRegister,  validatorCode, validatorRecoveryCode, passwordValidator, userDataValidator, addressValidator, companyValidator}

@@ -1,7 +1,7 @@
 const express = require('express');
 const routerUsers = express.Router();
-const {registerUser, loginUser, userValidate, getUserData, deleteUser, addUserAddress, completeRegistration, addCompany,uploadLogo} = require("../controllers/user")
-const {validatorRegister, validatorCode, userDataValidator, addressValidator, companyValidator} = require("../validators/users")
+const {registerUser, loginUser, userValidate, getUserData, deleteUser, addUserAddress, completeRegistration, addCompany,uploadLogo, recoveyCodeRequest, revoverPassword} = require("../controllers/user")
+const {validatorRegister, validatorCode, validatorRecoveryCode, userDataValidator, addressValidator, companyValidator, passwordValidator} = require("../validators/users")
 const {attemptsMiddleware} = require("../middleware/users")
 const {authMiddleware} = require("../middleware/session")   
 const {uploadMiddlewareMemory, errorMidelware} = require("../utils/handleStorage")
@@ -16,6 +16,9 @@ routerUsers.put("/register", userDataValidator, authMiddleware, completeRegistra
 routerUsers.patch("/address", addressValidator, authMiddleware, addUserAddress)
 routerUsers.patch("/company", companyValidator, authMiddleware, addCompany)
 routerUsers.patch("/logo", authMiddleware, uploadMiddlewareMemory.single("image"), errorMidelware, uploadLogo)
+routerUsers.post("/recovery-code", recoveyCodeRequest)
+routerUsers.patch("/recovery-password", validatorRecoveryCode, passwordValidator, revoverPassword)
+
 
 module.exports = {routerUsers}
 

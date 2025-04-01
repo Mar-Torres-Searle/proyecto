@@ -52,6 +52,9 @@ const UserScheme = new mongoose.Schema(
         emailCode: {
             type: String
         },
+        recoveryCode: {
+            type: String
+        },
         attempts: {
             type: Number,
             default: 3

@@ -5,7 +5,7 @@ Content-Type: application/json
 
 {
     "name": "Mar",
-    "email": "mtss@gmail.com",  
+    "email": "mttss@gmail.com",  
     "password": "14555508"
 }
 
@@ -13,10 +13,10 @@ Content-Type: application/json
 ###
 PUT http://localhost:5000/api/users/validate            
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjNDNhZjc3NGU4MjQ3NTdhMGFjMGMiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtdHNzQGdtYWlsLmNvbSIsInN0YXR1cyI6MCwiaWF0IjoxNzQzNTM3MDcyLCJleHAiOjE3NDM1NDQyNzJ9.fYF7uPmy2wzA8jK9xDIrkUZYLAk-JuEHXrtcanppDzU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjNTUxNWU1ZjJlOTJmMjBhOTYyYTEiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtdHRzc0BnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzU0MTUyNSwiZXhwIjoxNzQzNTQ4NzI1fQ.Zuq-FaNIt14vwbPdPpgNWAewYB_UbygpPyWAc9-FAl0
 
 {
-    "emailCode": "324399"
+    "emailCode": "186912"
 }
 
 //completar registro
@@ -38,9 +38,11 @@ Content-Type: application/json
 
 {
     "email": "mtss@gmail.com",
-    "password": "14555508"
+    "password": "14533308"
 }
 
+
+//añadir direccion
 ###
 PATCH http://localhost:5000/api/users/address
 Content-Type: application/json
@@ -58,6 +60,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjNDNhZ
 
 }
 
+//añadir empresa
 ###
 PATCH http://localhost:5000/api/users/company
 Content-Type: application/json
@@ -75,7 +78,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjNDNhZ
     }
 }
 
-
+//añadir logo
 ###
 PATCH http://localhost:5000/api/users/logo
 Content-Type: multipart/form-data; boundary=boundary123
@@ -88,10 +91,13 @@ Content-Type: image/jpeg
 < ./logoUser.jpeg
 --boundary123--
 
+//obtener usuario
 ###
 GET http://localhost:5000/api/users/
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VjNDNhZjc3NGU4MjQ3NTdhMGFjMGMiLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtdHNzQGdtYWlsLmNvbSIsInN0YXR1cyI6MCwiaWF0IjoxNzQzNTM3MDcyLCJleHAiOjE3NDM1NDQyNzJ9.fYF7uPmy2wzA8jK9xDIrkUZYLAk-JuEHXrtcanppDzU
+
+//eliminar usuario
 ###
 
 DELETE http://localhost:5000/api/users?soft=false
@@ -99,8 +105,25 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2ViZWM2NDkyY2RiZmNmYTYzMDY2MDciLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtYXJ0b3JyZUBnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzUxNDcyNCwiZXhwIjoxNzQzNTIxOTI0fQ.LdBrz8idZxVJO74QSZTo9C10wbbqy3M8-hAyv7zS_24
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2ViZWM2NDkyY2RiZmNmYTYzMDY2MDciLCJyb2xlIjpbInVzZXIiXSwiZW1haWwiOiJtYXJ0b3JyZUBnbWFpbC5jb20iLCJzdGF0dXMiOjAsImlhdCI6MTc0MzUxNDcyNCwiZXhwIjoxNzQzNTIxOTI0fQ.LdBrz8idZxVJO74QSZTo9C10wbbqy3M8-hAyv7zS_24
 
+//solicitar codigo de recuperacion
+###
+POST http://localhost:5000/api/users/recovery-code
+Content-Type: application/json
 
+{
+    "email": "mttss@gmail.com"
+}
 
+//cambiar contraseña
+###
+PATCH http://localhost:5000/api/users/recovery-password
+Content-Type: application/json
+
+{
+    "email": "mttss@gmail.com",
+    "recoveryCode": "466453",
+    "password": "14533308"
+}
 ###
 POST http://localhost:5000/api/email/send-email
 Content-Type: application/json

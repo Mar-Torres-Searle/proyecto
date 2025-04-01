@@ -43,9 +43,12 @@ const userValidate = async (req, res) => {
 const loginUser = async (req, res) => {
     //comprobamos que el usuario exista y que este validado, status 1
     const {email, password} = req.body
-    const user = await UserModel.findOne({email, status: 1})
+    const user = await UserModel.findOne({email})
     if (!user) {
         res.status(409).json({message: "El email no está registrado"})
+    }
+    if (user.status !== 1) {
+        res.status(409).json({message: "El email no está validado"})
     }
         //comprobamos que la contraseña sea correcta
     const passwordHash = await compare(password, user.password)
@@ -143,4 +146,37 @@ const deleteUser = async (req, res) => {
     return res.send({message: "El usuario ha sido eliminado"})
 }
 
-module.exports = {registerUser, loginUser, userValidate, getUserData, deleteUser, completeRegistration, addUserAddress, addCompany, uploadLogo}
+const recoveyCodeRequest = async (req, res) => {
+    const {email} = req.body
+    const user = await UserModel.findOne({email})
+    if (!user) {
+        return res.status(404).send({message: "El email no está registrado"})
+    }
+    if (user.status !== 1) {
+        return res.status(404).send({message: "El email no está validado"})
+    }
+    user.recoveryCode = generateCode()
+    await user.save()
+    return res.send({message: "El codigo de recuperación ha sido enviado", recoveryCode: user.recoveryCode})
+}
+
+const revoverPassword = async (req, res) => {
+    const {email, recoveryCode, password} = req.body
+    const user = await UserModel.findOne({email, status: 1})
+    if (!user) {
+        return res.status(404).send({message: "El email no está registrado"})
+    }
+    if (user.status !== 1) {
+        return res.status(404).send({message: "El email no está validado"})
+    }
+    if (user.recoveryCode !== recoveryCode) {
+        return res.status(404).send({message: "El codigo de recuperación es incorrecto"})
+    }
+    user.password = await encrypt(password)
+    user.recoveryCode = null
+    await user.save()
+    return res.send({message: "La contraseña ha sido cambiada"})
+    
+}
+
+module.exports = {registerUser, loginUser, userValidate, getUserData, deleteUser, completeRegistration, addUserAddress, addCompany, uploadLogo, recoveyCodeRequest, revoverPassword}
